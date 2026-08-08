@@ -219,7 +219,7 @@
 
       <div class="question-cloud" aria-label="Voorbeeldvragen voor een Tijdcapsule">
         <button class="question-bubble b1" type="button">Welke dag vergeet je nooit meer?</button>
-        <button class="question-bubble b2" type="button">Waar ruikt thuis naar?</button>
+        <button class="question-bubble b2" type="button">Welke plek uit je jeugd zie je nog zo voor je?</button>
         <button class="question-bubble b3" type="button">Welk geluid brengt je meteen terug?</button>
         <button class="question-bubble b4" type="button">Waar moest je vroeger altijd om lachen?</button>
         <button class="question-bubble b5" type="button">Wie heeft je het meest veranderd?</button>
@@ -314,12 +314,16 @@
         <h2>Kies hoe je het wilt vastleggen.</h2>
       </div>
 
-      <div class="packages-wrap">
+      
+        <p class="packages-shared-note">
+          Alle Tijdcapsules worden professioneel op locatie opgenomen en zorgvuldig afgewerkt.
+        </p>
+
+        <div class="packages-wrap">
         <div class="package-grid">
 
           <article class="package hover-card">
             <div class="package-head">
-              <p class="package-label">01 · Jullie voeren het gesprek</p>
               <h3>Tijdcapsule</h3>
               <p class="package-summary">Eenvoudig, persoonlijk en professioneel opgenomen.</p>
             </div>
@@ -328,8 +332,8 @@
 
             <ul class="package-quick">
               <li>Tot 1 uur opname</li>
-              <li>Professionele opname op locatie</li>
               <li>Tips & voorbeeldvragen vooraf</li>
+              <li>Lichte afwerking met subtiele muziek</li>
               <li>Digitale opname + USB</li>
             </ul>
 
@@ -349,6 +353,9 @@
               <p>
                 Je krijgt vooraf een korte lijst met tips en voorbeeldvragen.
               </p>
+              <p>
+                De opname wordt daarna netjes gemonteerd en licht afgewerkt. Waar het past kan er subtiele muziek onder komen, maar het gesprek blijft centraal.
+              </p>
             </div>
 
             <button class="package-link booking-trigger" type="button" data-package="Tijdcapsule" data-price="€199" data-booking-type="tijdcapsule">Plan een Tijdcapsule</button>
@@ -356,7 +363,6 @@
 
           <article class="package plus hover-card">
             <div class="package-head">
-              <p class="package-label">02 · Zelf interviewen + voorbereiding</p>
               <h3>Tijdcapsule Plus</h3>
               <p class="package-summary">Meer tijd en een gesprek dat je vooraf samen goed voorbereidt.</p>
             </div>
@@ -366,7 +372,7 @@
             <ul class="package-quick">
               <li>Tot 2 uur opname</li>
               <li>Persoonlijk voorbereidingsgesprek</li>
-              <li>Vragen op maat</li>
+              <li>Uitgebreide afwerking met muziek en sfeer</li>
               <li>Digitale opname + USB</li>
             </ul>
 
@@ -381,10 +387,13 @@
                 en welke invalshoek bij jullie past.
               </p>
               <p>
-                Daarna krijgen jullie een persoonlijke vragenlijst met tips voor doorvragen en een natuurlijke opbouw.
+                Daarna krijgen jullie praktische tips voor doorvragen en voor een natuurlijke opbouw van het gesprek.
               </p>
               <p>
                 Ook bij dit pakket kan het gesprek volledig privé plaatsvinden.
+              </p>
+              <p>
+                Na de opname wordt er uitgebreider gemonteerd, met meer ruimte voor muziek, sfeer en mooie overgangen. Daardoor voelt het eindresultaat meer als een echt luisterverhaal.
               </p>
             </div>
 
@@ -393,7 +402,6 @@
 
           <article class="package hover-card">
             <div class="package-head">
-              <p class="package-label">03 · Meerdere stemmen over één persoon</p>
               <h3>Portret</h3>
               <p class="package-summary">Een audioportret opgebouwd uit herinneringen van anderen.</p>
             </div>
@@ -545,15 +553,42 @@
             <input type="text" name="voor_wie" placeholder="Bijv. mijn vader, mijn ouders, een vriendin">
           </label>
 
-          <label class="form-field">
-            <span>Voorgestelde datum</span>
-            <input type="date" name="datum" id="bookingDate" required>
-          </label>
+          <div class="form-field form-field-full-grid moment-field">
+            <span>Wanneer zou goed uitkomen?</span>
+            <div class="moment-picker">
+              <label class="moment-date">
+                <span>Datum</span>
+                <input
+                  type="date"
+                  name="datum"
+                  id="bookingDate"
+                  required
+                >
+              </label>
 
-          <label class="form-field">
-            <span>Voorgestelde tijd</span>
-            <input type="time" name="tijd" required>
-          </label>
+              <fieldset class="daypart-picker">
+                <legend>Tijdstip</legend>
+                <div class="daypart-options">
+                  <label>
+                    <input type="radio" name="tijdvak" value="Ochtend">
+                    <span>Ochtend</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="tijdvak" value="Middag">
+                    <span>Middag</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="tijdvak" value="Avond">
+                    <span>Avond</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="tijdvak" value="Maakt niet uit" checked>
+                    <span>Maakt niet uit</span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
         </div>
 
         <label class="form-field form-field-full">
@@ -567,7 +602,7 @@
 
         <div class="booking-actions">
           <p>
-            Je aanvraag is nog geen definitieve boeking. Ik neem daarna contact met je op om de afspraak definitief te maken.
+            Je aanvraag is nog geen definitieve boeking. Er wordt daarna contact met je opgenomen om de afspraak definitief te maken.
           </p>
           <button class="button booking-submit" type="submit">Aanvraag versturen</button>
         </div>
@@ -621,8 +656,14 @@
           </label>
 
           <label class="form-field">
-            <span>Wanneer zou je het ongeveer af willen hebben?</span>
-            <input type="date" name="gewenste_opleverdatum" id="portretDeadline">
+            <span>Rond wanneer zou je het af willen hebben?</span>
+            <input
+              type="text"
+              name="gewenste_oplevermoment"
+              id="portretDeadlineText"
+              placeholder="Bijv. voor een verjaardag in november"
+              autocomplete="off"
+            >
           </label>
         </div>
 

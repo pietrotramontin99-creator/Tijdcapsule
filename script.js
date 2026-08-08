@@ -97,7 +97,6 @@ const selectedPrice = document.getElementById("selectedPrice");
 const bookingPackageName = document.getElementById("bookingPackageName");
 const bookingPackagePrice = document.getElementById("bookingPackagePrice");
 const bookingDate = document.getElementById("bookingDate");
-
 if (bookingDate) {
   const today = new Date();
   const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
@@ -262,15 +261,7 @@ allExamplePlayers.forEach((player) => {
 // ----------------------------------------------------------
 const portretForm = document.getElementById("portretForm");
 const portretError = document.getElementById("portretError");
-const portretDeadline = document.getElementById("portretDeadline");
-
-if (portretDeadline) {
-  const today = new Date();
-  const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
-    .toISOString()
-    .split("T")[0];
-  portretDeadline.min = localToday;
-}
+const portretDeadlineText = document.getElementById("portretDeadlineText");
 
 function openPortretBooking() {
   if (!bookingModal || !portretForm || !bookingForm) return;
@@ -378,7 +369,7 @@ portretForm?.addEventListener("submit", async (event) => {
     if (successTitle) successTitle.textContent = "Je Portret-aanvraag is ontvangen.";
     if (successText) {
       successText.textContent =
-        "Ik neem contact met je op om het idee, de mogelijke interviews en de planning samen te bespreken.";
+        "Er wordt contact met je opgenomen om het idee, de mogelijke interviews en de planning samen te bespreken.";
     }
 
     bookingSuccess.querySelector("button")?.focus();
@@ -392,3 +383,45 @@ portretForm?.addEventListener("submit", async (event) => {
     submitButton.textContent = originalText;
   }
 });
+
+
+// ----------------------------------------------------------
+// v30 — keep the three main package cards equally tall when closed
+// ----------------------------------------------------------
+const packageGridForHeight = document.querySelector(".package-grid");
+
+function equalizePackageHeights() {
+  if (!packageGridForHeight) return;
+
+  if (window.innerWidth <= 1080) {
+    packageGridForHeight.style.removeProperty("--equal-package-height");
+    return;
+  }
+
+  const cards = [...packageGridForHeight.querySelectorAll(":scope > .package")];
+  if (!cards.length) return;
+
+  packageGridForHeight.classList.add("measuring-closed");
+  packageGridForHeight.style.setProperty("--equal-package-height", "0px");
+
+  // Force a layout pass with all cards in their natural closed state.
+  void packageGridForHeight.offsetHeight;
+
+  const tallest = Math.ceil(
+    Math.max(...cards.map((card) => card.getBoundingClientRect().height))
+  );
+
+  packageGridForHeight.style.setProperty("--equal-package-height", `${tallest}px`);
+  packageGridForHeight.classList.remove("measuring-closed");
+}
+
+window.addEventListener("load", equalizePackageHeights);
+
+let packageResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(packageResizeTimer);
+  packageResizeTimer = setTimeout(equalizePackageHeights, 120);
+});
+
+// Re-measure once web fonts have settled, since that can change line wrapping.
+document.fonts?.ready.then(equalizePackageHeights);

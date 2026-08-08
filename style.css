@@ -2480,3 +2480,505 @@ body.booking-open {
     margin-top: 42px !important;
   }
 }
+
+
+/* v22 — question cloud clipping fix */
+.question-cloud {
+  overflow: visible !important;
+  padding-top: 12px;
+}
+
+/* Give the top row a little extra breathing room while floating */
+.b1 { top: 5% !important; }
+.b2 { top: 4% !important; }
+.b3 { top: 7% !important; }
+
+
+/* ==========================================================
+   v23 — softer booking moment controls
+   ========================================================== */
+
+.form-field-full-grid {
+  grid-column: 1 / -1;
+}
+
+.moment-field {
+  gap: 9px;
+}
+
+.moment-picker {
+  display: grid;
+  grid-template-columns: minmax(210px, .95fr) minmax(310px, 1.35fr);
+  gap: 12px;
+  padding: 11px;
+  border: 1px solid rgba(79, 120, 168, .16);
+  border-radius: 18px 22px 17px 21px;
+  background: rgba(237, 243, 248, .72);
+}
+
+.moment-date {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.moment-date > span,
+.daypart-picker legend {
+  padding: 0 2px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.moment-date input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 12px 15px 11px 14px;
+  background: rgba(255,255,255,.88);
+  box-shadow: inset 0 0 0 1px rgba(79,120,168,.13);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: box-shadow .18s ease, background .18s ease, transform .18s ease;
+}
+
+.moment-date input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(79,120,168,.11), inset 0 0 0 1px var(--blue);
+}
+
+.moment-date input::placeholder {
+  color: #8c98a7;
+}
+
+.daypart-picker {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.daypart-picker legend {
+  margin-bottom: 5px;
+}
+
+.daypart-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.daypart-options label {
+  position: relative;
+  cursor: pointer;
+}
+
+.daypart-options input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.daypart-options span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 43px;
+  padding: 0 13px;
+  border: 1px solid rgba(79,120,168,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease;
+}
+
+.daypart-options label:hover span {
+  transform: translateY(-1px);
+  background: #fff;
+  border-color: rgba(79,120,168,.3);
+}
+
+.daypart-options input:checked + span {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(32,58,95,.11);
+}
+
+.daypart-options input:focus-visible + span {
+  box-shadow: 0 0 0 3px rgba(79,120,168,.18);
+}
+
+/* Free-text Portret timing field: avoid anything that resembles a browser date widget */
+#portretDeadlineText {
+  border-radius: 13px 16px 12px 15px;
+  background: rgba(237,243,248,.62);
+  border-color: rgba(79,120,168,.18);
+}
+
+#portretDeadlineText:focus {
+  background: #fff;
+}
+
+@media (max-width: 720px) {
+  .moment-picker {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .daypart-options span {
+    min-height: 40px;
+    padding: 0 11px;
+  }
+}
+
+
+/* ==========================================================
+   v24 — package cards only grow when details are opened
+   ========================================================== */
+
+/* Don't force every card to reserve space for hidden content. */
+.package-grid {
+  align-items: start;
+}
+
+.package {
+  min-height: 0 !important;
+}
+
+/* Keep the action naturally below the visible content instead of pinning it
+   to the bottom of an artificially tall card. */
+.package-link {
+  margin-top: 24px !important;
+  padding-top: 0 !important;
+}
+
+/* Replace the old grid-row accordion: with multiple <p> elements that method
+   could still leave invisible height behind. */
+.package-details {
+  display: block !important;
+  max-height: 0;
+  margin-top: 0 !important;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    max-height .42s cubic-bezier(.2,.75,.25,1),
+    opacity .22s ease,
+    transform .35s ease,
+    margin-top .35s ease;
+}
+
+.package-details > * {
+  overflow: visible !important;
+}
+
+.package-details.open {
+  max-height: 260px;
+  margin-top: 16px !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* v25 — a little more room for the added package explanation */
+.package-details.open {
+  max-height: 390px;
+}
+
+
+/* ==========================================================
+   v28 — equal package-card heights, no numbered mini-headings
+   ========================================================== */
+
+/* The three main package cards have the same closed height.
+   The USB card stays naturally shorter. */
+.package-grid {
+  align-items: start;
+}
+
+.package-grid > .package {
+  min-height: 500px !important;
+}
+
+/* Keep the booking buttons lined up along the bottom when closed.
+   When details open, that individual card can simply grow. */
+.package-grid > .package > .package-link {
+  margin-top: auto !important;
+}
+
+/* Once details are open, give them their normal spacing before the CTA. */
+.package-grid > .package:has(.package-details.open) > .package-link {
+  margin-top: 24px !important;
+}
+
+/* Defensive: hide any old numbered package label if stale markup is cached. */
+.package-label {
+  display: none !important;
+}
+
+@media (max-width: 1080px) {
+  .package-grid > .package {
+    min-height: 0 !important;
+  }
+
+  .package-grid > .package > .package-link {
+    margin-top: 24px !important;
+  }
+}
+
+
+/* ==========================================================
+   v29 — calendar back, daypart pills stay
+   ========================================================== */
+
+#bookingDate {
+  appearance: none;
+  -webkit-appearance: none;
+  color-scheme: light;
+  cursor: pointer;
+}
+
+#bookingDate::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: .62;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+#bookingDate:hover::-webkit-calendar-picker-indicator {
+  opacity: .9;
+  transform: scale(1.04);
+}
+
+
+/* ==========================================================
+   v30 — stronger booking CTA + genuinely equal package heights
+   ========================================================== */
+
+/* The base height is measured in JS, so text wrapping can't make one card
+   accidentally taller than the others. */
+.package-grid > .package {
+  min-height: var(--equal-package-height, 0px) !important;
+}
+
+/* During measurement, pretend every accordion is closed. */
+.package-grid.measuring-closed .package-details {
+  max-height: 0 !important;
+  margin-top: 0 !important;
+  opacity: 0 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.package-grid.measuring-closed .package-link {
+  margin-top: auto !important;
+}
+
+/* Make the actual booking action feel like a real, inviting button. */
+button.package-link.booking-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: max-content;
+  min-height: 46px;
+  margin-top: auto !important;
+  padding: 12px 17px 12px 18px !important;
+  border: 0 !important;
+  border-radius: 18px 15px 20px 16px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow:
+    4px 4px 0 rgba(230, 200, 103, .58),
+    0 8px 18px rgba(32, 58, 95, .13);
+  transform: translateY(0);
+  transition:
+    transform .2s cubic-bezier(.2,.8,.2,1),
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+button.package-link.booking-trigger::after {
+  content: "→";
+  font-size: 15px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+
+button.package-link.booking-trigger:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translate(-1px, -3px);
+  box-shadow:
+    6px 6px 0 rgba(230, 200, 103, .66),
+    0 13px 24px rgba(32, 58, 95, .17);
+}
+
+button.package-link.booking-trigger:hover::after {
+  transform: translateX(3px);
+}
+
+button.package-link.booking-trigger:active {
+  transform: translate(2px, 2px);
+  box-shadow:
+    2px 2px 0 rgba(230, 200, 103, .56),
+    0 5px 10px rgba(32, 58, 95, .12);
+}
+
+/* If a card is expanded its CTA follows the extra information naturally. */
+.package-grid > .package:has(.package-details.open) > button.package-link.booking-trigger {
+  margin-top: 24px !important;
+}
+
+@media (max-width: 1080px) {
+  .package-grid > .package {
+    min-height: 0 !important;
+  }
+
+  button.package-link.booking-trigger {
+    margin-top: 24px !important;
+  }
+}
+
+
+/* ==========================================================
+   v31 — keep long CTA labels safely inside package cards
+   ========================================================== */
+
+button.package-link.booking-trigger {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100%;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  text-align: center;
+  white-space: normal;
+}
+
+/* Keep arrow attached to the label without letting it push through the edge. */
+button.package-link.booking-trigger::after {
+  flex: 0 0 auto;
+}
+
+/* The Plus card has a longer label, so allow a clean two-line fallback
+   rather than ever touching the card border. */
+.package.plus button.package-link.booking-trigger {
+  line-height: 1.2;
+}
+
+
+/* ==========================================================
+   v32 — shared package promise
+   ========================================================== */
+
+.packages-shared-note {
+  max-width: 650px;
+  margin: -4px 0 28px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* ==========================================================
+   v33 — keep package CTA clearly inside the card
+   ========================================================== */
+
+/* Don't let the CTA sit on either the internal divider or the card edge. */
+.package-grid > .package > button.package-link.booking-trigger {
+  width: calc(100% - 10px) !important;
+  max-width: calc(100% - 10px) !important;
+  align-self: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  margin-top: 22px !important;
+  margin-bottom: 3px;
+}
+
+/* Expanded cards keep exactly the same clean gap before the CTA. */
+.package-grid > .package:has(.package-details.open) > button.package-link.booking-trigger {
+  margin-top: 22px !important;
+}
+
+/* Keep the divider itself separate from the action below it. */
+.package-toggle {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1080px) {
+  .package-grid > .package > button.package-link.booking-trigger {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 22px !important;
+  }
+}
+
+
+/* ==========================================================
+   v34 — align all closed package CTAs on one horizontal line
+   ========================================================== */
+
+/* Closed cards: use the remaining flex space above the CTA.
+   Because the three cards already share the same measured height,
+   this places every button on exactly the same baseline. */
+.package-grid > .package:not(:has(.package-details.open)) > button.package-link.booking-trigger {
+  margin-top: auto !important;
+  margin-bottom: 3px;
+}
+
+/* Open card: the button should follow the revealed information naturally. */
+.package-grid > .package:has(.package-details.open) > button.package-link.booking-trigger {
+  margin-top: 22px !important;
+}
+
+/* On stacked layouts there's no need to align buttons between cards. */
+@media (max-width: 1080px) {
+  .package-grid > .package:not(:has(.package-details.open)) > button.package-link.booking-trigger,
+  .package-grid > .package:has(.package-details.open) > button.package-link.booking-trigger {
+    margin-top: 22px !important;
+  }
+}
+
+
+/* ==========================================================
+   v35 — remove the divider that could visually cross the CTA
+   ========================================================== */
+
+/* One divider above 'Meer informatie' is enough.
+   Removing the lower divider keeps the CTA area clean. */
+.package-toggle {
+  border-bottom: 0 !important;
+}
+
+/* Closed cards: all CTA buttons stay pinned to the same baseline. */
+.package-grid > .package:not(:has(.package-details.open)) > button.package-link.booking-trigger {
+  margin-top: auto !important;
+  margin-bottom: 7px !important;
+}
+
+/* Open cards: keep a clear gap after the revealed copy. */
+.package-grid > .package:has(.package-details.open) > button.package-link.booking-trigger {
+  margin-top: 24px !important;
+  margin-bottom: 7px !important;
+}
