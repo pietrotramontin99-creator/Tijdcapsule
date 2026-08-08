@@ -1756,3 +1756,727 @@ body.booking-open {
     width: 100%;
   }
 }
+
+
+/* ==========================================================
+   v16 — more organic, less static, audio examples, USB alignment
+   ========================================================== */
+
+/* ---- More organic overall rhythm ---- */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-organic-shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 46% 54% 65% 35% / 42% 34% 66% 58%;
+  background: var(--blue-soft);
+  filter: blur(.2px);
+  opacity: .7;
+}
+
+.hero-organic-shape-one {
+  width: 420px;
+  height: 280px;
+  left: -180px;
+  top: 40px;
+  transform: rotate(-12deg);
+}
+
+.hero-organic-shape-two {
+  width: 220px;
+  height: 150px;
+  right: 7%;
+  bottom: 20px;
+  opacity: .35;
+  transform: rotate(18deg);
+}
+
+.hero-image-wrap {
+  border-radius: 38% 62% 46% 54% / 30% 40% 60% 70%;
+  transition: border-radius .55s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease;
+}
+
+.hero-image-wrap:hover {
+  border-radius: 48% 52% 57% 43% / 42% 34% 66% 58%;
+}
+
+.angle-card:nth-child(1) { border-radius: 28px 12px 32px 16px; }
+.angle-card:nth-child(2) { border-radius: 14px 32px 18px 30px; }
+.angle-card:nth-child(3) { border-radius: 30px 18px 12px 34px; }
+
+.questions {
+  position: relative;
+  overflow: hidden;
+}
+
+.questions::before,
+.questions::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.33);
+}
+
+.questions::before {
+  width: 440px;
+  height: 210px;
+  left: -130px;
+  top: 90px;
+  transform: rotate(-16deg);
+}
+
+.questions::after {
+  width: 320px;
+  height: 150px;
+  right: -80px;
+  bottom: 40px;
+  transform: rotate(12deg);
+}
+
+.question-cloud,
+.questions .section-title {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- USB card: shorter and visually aligned with bullet lists ---- */
+.packages-wrap {
+  align-items: start;
+}
+
+.usb-card-compact {
+  min-height: 0 !important;
+  height: auto;
+  align-self: start;
+  margin-top: 182px;
+  padding: 24px 24px 18px;
+  border-radius: 28px 14px 30px 16px;
+}
+
+.usb-card-compact > div {
+  margin-bottom: 8px;
+}
+
+.usb-card-compact .eyebrow {
+  margin-bottom: 10px;
+}
+
+.usb-card-compact h3 {
+  font-size: 25px;
+}
+
+.usb-card-compact p:not(.eyebrow) {
+  margin-bottom: 2px;
+}
+
+.usb-card-compact img {
+  width: 100%;
+  max-width: 225px;
+  margin-top: 6px;
+}
+
+@media (max-width: 1080px) {
+  .usb-card-compact {
+    margin-top: 0;
+  }
+}
+
+/* ---- Organic package cards ---- */
+.organic-packages {
+  position: relative;
+  overflow: hidden;
+}
+
+.organic-packages::before {
+  content: "";
+  position: absolute;
+  width: 720px;
+  height: 170px;
+  left: -150px;
+  top: -95px;
+  border-radius: 50%;
+  background: var(--blue-soft);
+  opacity: .42;
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+
+.organic-packages > * {
+  position: relative;
+  z-index: 1;
+}
+
+.package:nth-child(1) {
+  border-radius: 26px 12px 30px 18px;
+}
+
+.package:nth-child(2) {
+  border-radius: 14px 30px 18px 28px;
+}
+
+.package:nth-child(3) {
+  border-radius: 30px 18px 12px 32px;
+}
+
+/* ---- Audio example section ---- */
+.audio-examples {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.audio-examples::before {
+  content: "";
+  position: absolute;
+  width: 580px;
+  height: 240px;
+  right: -180px;
+  top: 35px;
+  border-radius: 44% 56% 64% 36% / 50% 36% 64% 50%;
+  background: var(--blue-soft);
+  opacity: .65;
+  transform: rotate(-11deg);
+}
+
+.audio-examples-head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(40px, 8vw, 100px);
+  align-items: end;
+  margin-bottom: 58px;
+}
+
+.audio-examples-head > p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.audio-example-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.audio-example-card {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  border: 1px solid #b9cad9;
+  border-radius: 28px 14px 30px 17px;
+  background: rgba(251,250,247,.88);
+  box-shadow: 0 12px 30px rgba(32,58,95,.07);
+  backdrop-filter: blur(5px);
+  transition:
+    transform .28s cubic-bezier(.2,.75,.25,1),
+    box-shadow .28s ease,
+    border-radius .35s ease;
+}
+
+.audio-example-card:nth-child(2) {
+  border-radius: 14px 30px 17px 28px;
+}
+
+.audio-example-card:nth-child(3) {
+  border-radius: 30px 18px 13px 32px;
+}
+
+.audio-example-card:hover {
+  transform: translateY(-7px) rotate(-.25deg);
+  box-shadow: 0 22px 48px rgba(32,58,95,.13);
+  border-radius: 34px 18px 24px 22px;
+}
+
+.offset-card {
+  margin-top: 28px;
+}
+
+.audio-card-number {
+  margin-bottom: 46px;
+  color: var(--blue);
+  font-family: var(--serif);
+  font-size: 16px;
+}
+
+.audio-card-type {
+  display: inline-block;
+  margin-bottom: 9px;
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.audio-card-copy h3 {
+  max-width: 340px;
+  font-size: 28px;
+  line-height: 1.08;
+}
+
+.audio-card-copy p {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.custom-player {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.play-button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--navy);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.06);
+  background: var(--blue);
+}
+
+.player-track {
+  position: relative;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #cad7e2;
+  cursor: pointer;
+}
+
+.player-progress {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue);
+}
+
+.player-time {
+  color: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.audio-demo-note {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 34px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.audio-demo-note code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--blue-pale);
+  color: var(--navy);
+}
+
+@media (max-width: 900px) {
+  .audio-examples-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .audio-example-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offset-card {
+    margin-top: 0;
+  }
+
+  .audio-example-card {
+    min-height: 290px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-organic-shape-one {
+    width: 300px;
+    height: 190px;
+  }
+
+  .usb-card-compact {
+    padding: 22px;
+  }
+}
+
+
+/* v17 - USB card aligned with top of package cards */
+
+.packages-wrap{
+    align-items:flex-start !important;
+}
+
+.usb-card-compact{
+    margin-top:0 !important;
+    align-self:flex-start !important;
+    min-height:auto !important;
+    height:auto !important;
+    padding:22px 22px 18px !important;
+}
+
+.usb-card-compact .eyebrow{
+    display:none !important;
+}
+
+.usb-card-compact img{
+    max-width:210px;
+    margin:10px auto 0;
+}
+
+@media (max-width:1080px){
+    .usb-card-compact{
+        margin-top:24px !important;
+    }
+}
+
+
+/* ==========================================================
+   v18 — small warm accent layer + gift CTA
+   ========================================================== */
+
+:root {
+  --yellow: #e6c867;
+  --yellow-soft: #f4e7ad;
+  --yellow-pale: #fbf5d8;
+}
+
+/* Gift CTA: intentionally not another rectangular content block */
+.gift-bubble {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: min(100%, 390px);
+  gap: 2px;
+  margin-top: 24px;
+  padding: 17px 22px 18px 24px;
+  border: 1px solid rgba(168, 137, 40, .25);
+  border-radius: 30px 22px 32px 19px;
+  background: var(--yellow-pale);
+  color: var(--navy);
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(32,58,95,.045);
+  transform: rotate(-.7deg);
+  transition:
+    transform .25s cubic-bezier(.2,.8,.2,1),
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.gift-bubble::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 30px;
+  bottom: -8px;
+  border-right: 1px solid rgba(168,137,40,.22);
+  border-bottom: 1px solid rgba(168,137,40,.22);
+  background: var(--yellow-pale);
+  transform: rotate(45deg);
+}
+
+.gift-bubble:hover {
+  transform: translateY(-4px) rotate(.35deg);
+  box-shadow: 0 15px 30px rgba(32,58,95,.10);
+  background: #f8edbc;
+}
+
+.gift-bubble-kicker {
+  margin-bottom: 4px;
+  color: #927727;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.gift-bubble strong {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.gift-bubble > span:last-child {
+  color: #6e644e;
+  font-size: 11px;
+}
+
+/* The old gift sentence should never show if stale markup remains. */
+.gift-sentence {
+  display: none !important;
+}
+
+/* Tiny warm details only — blue stays the primary language */
+.hero-organic-shape-two {
+  background: var(--yellow-soft) !important;
+  opacity: .46 !important;
+}
+
+.angle-card:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 18px;
+  right: 18px;
+  top: 19px;
+  border-radius: 50%;
+  background: var(--yellow-soft);
+  opacity: .8;
+  transform: rotate(-11deg);
+  pointer-events: none;
+}
+
+.audio-example-card:nth-child(2) {
+  box-shadow:
+    0 12px 30px rgba(32,58,95,.07),
+    10px 10px 0 rgba(230,200,103,.16);
+}
+
+/* A tiny warm signal on one of the floating questions */
+.question-bubble.b1 {
+  border-color: rgba(190, 157, 55, .48);
+  background: rgba(251,245,216,.92);
+}
+
+.question-bubble.b1:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+/* Booking form: warm confirmation without changing the blue identity */
+.success-mark {
+  box-shadow: 0 0 0 8px rgba(230,200,103,.22);
+}
+
+@media (max-width: 640px) {
+  .gift-bubble {
+    width: 100%;
+    transform: none;
+  }
+
+  .gift-bubble:hover {
+    transform: translateY(-3px);
+  }
+}
+
+
+/* ==========================================================
+   v19 — sticky-note gift CTA, two yellow accents removed
+   ========================================================== */
+
+.intro {
+  position: relative;
+  overflow: visible;
+}
+
+/* Old inline bubble is no longer used. */
+.gift-bubble {
+  display: none !important;
+}
+
+/* A deliberately "stuck-on" note, separate from the body copy. */
+.gift-sticky-note {
+  position: absolute;
+  z-index: 3;
+  right: clamp(28px, 6vw, 92px);
+  bottom: 54px;
+  width: min(285px, 24vw);
+  min-width: 235px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 25px 24px 22px;
+  border: 1px solid rgba(168, 137, 40, .22);
+  border-radius: 4px 7px 5px 3px;
+  background: var(--yellow-pale);
+  color: var(--navy);
+  text-decoration: none;
+  box-shadow:
+    0 13px 24px rgba(32, 58, 95, .10),
+    0 2px 3px rgba(32, 58, 95, .06);
+  transform: rotate(3.2deg);
+  transform-origin: 50% 0;
+  transition:
+    transform .28s cubic-bezier(.2,.8,.2,1),
+    box-shadow .28s ease;
+}
+
+.gift-sticky-note:hover {
+  transform: rotate(1.2deg) translateY(-5px);
+  box-shadow:
+    0 20px 35px rgba(32, 58, 95, .14),
+    0 3px 5px rgba(32, 58, 95, .07);
+}
+
+.gift-sticky-note .gift-bubble-kicker {
+  margin-bottom: 5px;
+}
+
+.gift-sticky-note strong {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.gift-sticky-note > span:last-child {
+  color: #6e644e;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* Slightly translucent tape to make it look physically attached. */
+.sticky-tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 78px;
+  height: 22px;
+  border: 1px solid rgba(118, 145, 171, .12);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(220, 232, 242, .72),
+      rgba(244, 247, 250, .88),
+      rgba(220, 232, 242, .72)
+    );
+  box-shadow: 0 2px 4px rgba(32, 58, 95, .05);
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+/* Leave room for the note so it doesn't sit on top of the pills. */
+.intro .examples {
+  padding-right: clamp(0px, 26vw, 330px);
+}
+
+/* REMOVE ONLY these two yellow accents from v18. */
+.angle-card:nth-child(2)::after {
+  display: none !important;
+}
+
+.question-bubble.b1 {
+  border-color: #afc4d7 !important;
+  background: rgba(255,255,255,.74) !important;
+}
+
+.question-bubble.b1:hover {
+  background: var(--blue) !important;
+  border-color: var(--blue) !important;
+}
+
+@media (max-width: 1000px) {
+  .gift-sticky-note {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(310px, 80%);
+    min-width: 0;
+    margin: 38px 0 8px auto;
+  }
+
+  .intro .examples {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .gift-sticky-note {
+    width: min(290px, 92%);
+    margin: 34px auto 8px;
+    transform: rotate(2deg);
+  }
+
+  .gift-sticky-note:hover {
+    transform: rotate(.5deg) translateY(-3px);
+  }
+}
+
+
+/* ==========================================================
+   v20 — separate Portret form, isolated sticky note, tiny credits
+   ========================================================== */
+
+/* Give the sticky note more breathing room from the intro text. */
+.gift-sticky-note {
+  right: clamp(18px, 4vw, 64px) !important;
+  bottom: 20px !important;
+  transform: rotate(4.2deg) !important;
+}
+
+.gift-sticky-note:hover {
+  transform: rotate(2deg) translateY(-5px) !important;
+}
+
+/* No kicker anymore: the note is direct. */
+.gift-sticky-note strong {
+  margin-top: 1px;
+}
+
+/* Make stock credits as unobtrusive as possible. */
+.photo-credit {
+  margin-top: 5px !important;
+  text-align: right;
+  opacity: .42;
+  font-size: 8px !important;
+  line-height: 1.2;
+}
+
+.photo-credit a {
+  text-decoration: none;
+}
+
+.photo-credit:hover {
+  opacity: .7;
+}
+
+/* Portret-specific form uses the same visual system, with slightly more room. */
+.portret-form textarea {
+  min-height: 94px;
+}
+
+@media (max-width: 1000px) {
+  .gift-sticky-note {
+    right: auto !important;
+    bottom: auto !important;
+    margin-top: 52px !important;
+    margin-bottom: 18px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .gift-sticky-note {
+    margin-top: 42px !important;
+  }
+}

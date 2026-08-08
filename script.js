@@ -194,3 +194,201 @@ bookingForm?.addEventListener("submit", async (event) => {
     submitButton.textContent = originalText;
   }
 });
+
+
+// Custom example audio players
+const allExamplePlayers = document.querySelectorAll("[data-player]");
+
+function formatAudioTime(seconds) {
+  if (!Number.isFinite(seconds)) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+  return `${mins}:${secs}`;
+}
+
+allExamplePlayers.forEach((player) => {
+  const audio = player.querySelector("audio");
+  const playButton = player.querySelector("[data-play]");
+  const track = player.querySelector("[data-track]");
+  const progress = player.querySelector("[data-progress]");
+  const time = player.querySelector("[data-time]");
+
+  const updatePlayer = () => {
+    const ratio = audio.duration ? audio.currentTime / audio.duration : 0;
+    progress.style.width = `${ratio * 100}%`;
+    time.textContent = formatAudioTime(audio.currentTime);
+  };
+
+  playButton.addEventListener("click", () => {
+    if (audio.paused) {
+      allExamplePlayers.forEach((otherPlayer) => {
+        const otherAudio = otherPlayer.querySelector("audio");
+        if (otherAudio !== audio) otherAudio.pause();
+      });
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+
+  audio.addEventListener("play", () => {
+    playButton.textContent = "❚❚";
+    playButton.setAttribute("aria-label", "Pauzeren");
+  });
+
+  audio.addEventListener("pause", () => {
+    playButton.textContent = "▶";
+    playButton.setAttribute("aria-label", "Afspelen");
+  });
+
+  audio.addEventListener("timeupdate", updatePlayer);
+
+  audio.addEventListener("ended", () => {
+    audio.currentTime = 0;
+    updatePlayer();
+  });
+
+  track.addEventListener("click", (event) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+});
+
+
+// ----------------------------------------------------------
+// v20 — separate aanvraagflow for Portret
+// ----------------------------------------------------------
+const portretForm = document.getElementById("portretForm");
+const portretError = document.getElementById("portretError");
+const portretDeadline = document.getElementById("portretDeadline");
+
+if (portretDeadline) {
+  const today = new Date();
+  const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+    .toISOString()
+    .split("T")[0];
+  portretDeadline.min = localToday;
+}
+
+function openPortretBooking() {
+  if (!bookingModal || !portretForm || !bookingForm) return;
+
+  bookingForm.hidden = true;
+  portretForm.hidden = false;
+  bookingSuccess.hidden = true;
+  bookingError.textContent = "";
+  if (portretError) portretError.textContent = "";
+
+  const title = document.getElementById("bookingTitle");
+  if (title) title.textContent = "Bespreek een Portret";
+
+  const intro = document.querySelector(".booking-header > p:last-child");
+  if (intro) {
+    intro.textContent =
+      "Een Portret bestaat uit meerdere interviews en wordt daarom niet op één datum ingepland. Vertel kort over het idee; daarna bespreken we samen wie er geïnterviewd worden en hoe de planning eruitziet.";
+  }
+
+  bookingModal.classList.add("is-open");
+  bookingModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("booking-open");
+
+  setTimeout(() => {
+    portretForm.querySelector('input:not([type="hidden"])')?.focus();
+  }, 80);
+}
+
+function openStandardBookingV20(packageName = "Nog niet gekozen", price = "") {
+  if (!bookingModal || !bookingForm || !portretForm) return;
+
+  selectedPackage.value = packageName;
+  selectedPrice.value = price;
+  bookingPackageName.textContent = packageName;
+  bookingPackagePrice.textContent = price;
+
+  portretForm.hidden = true;
+  bookingForm.hidden = false;
+  bookingSuccess.hidden = true;
+  bookingError.textContent = "";
+  if (portretError) portretError.textContent = "";
+
+  const title = document.getElementById("bookingTitle");
+  if (title) title.textContent = "Plan een Tijdcapsule";
+
+  const intro = document.querySelector(".booking-header > p:last-child");
+  if (intro) {
+    intro.textContent =
+      "Vul een moment in dat goed uitkomt. De aanvraag is nog niet definitief; daarna volgt persoonlijk contact om de afspraak te bevestigen.";
+  }
+
+  bookingModal.classList.add("is-open");
+  bookingModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("booking-open");
+
+  setTimeout(() => {
+    bookingForm.querySelector('input:not([type="hidden"])')?.focus();
+  }, 80);
+}
+
+// Capture phase prevents the older click handler from opening the standard form first.
+document.querySelectorAll(".booking-trigger").forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
+    if (trigger.dataset.bookingType === "portret") {
+      event.stopImmediatePropagation();
+      openPortretBooking();
+    }
+  }, true);
+});
+
+portretForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (portretError) portretError.textContent = "";
+
+  const action = portretForm.getAttribute("action") || "";
+
+  if (action.includes("YOUR_FORM_ID")) {
+    if (portretError) {
+      portretError.textContent =
+        "Het formulier staat klaar, maar moet nog aan Formspree worden gekoppeld. Vervang YOUR_FORM_ID in index.html door je eigen Formspree-ID.";
+    }
+    return;
+  }
+
+  const submitButton = portretForm.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+  submitButton.disabled = true;
+  submitButton.textContent = "Versturen...";
+
+  try {
+    const response = await fetch(action, {
+      method: "POST",
+      body: new FormData(portretForm),
+      headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) throw new Error("Portret form submission failed");
+
+    portretForm.reset();
+    portretForm.hidden = true;
+    bookingSuccess.hidden = false;
+
+    const successTitle = bookingSuccess.querySelector("h2");
+    const successText = bookingSuccess.querySelector("p:not(.eyebrow)");
+    if (successTitle) successTitle.textContent = "Je Portret-aanvraag is ontvangen.";
+    if (successText) {
+      successText.textContent =
+        "Ik neem contact met je op om het idee, de mogelijke interviews en de planning samen te bespreken.";
+    }
+
+    bookingSuccess.querySelector("button")?.focus();
+  } catch (error) {
+    if (portretError) {
+      portretError.textContent =
+        "Versturen lukt op dit moment niet. Probeer het later opnieuw of neem rechtstreeks contact op.";
+    }
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+});
